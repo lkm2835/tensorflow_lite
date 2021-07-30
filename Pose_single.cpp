@@ -194,10 +194,8 @@ interpreter->AllocateTensors();
 	
 	kmcontext.printNodeDims();
 
-	kmcontext.channelPartitioning("CONV_2D", 0.75);
+	kmcontext.channelPartitioning("CONV_2D", 1);
 	
-	//DebugTensorflow();
-
 	int accuracy = 0;
 	int test_num = 1;
 		clock_t start = clock();
@@ -223,7 +221,8 @@ interpreter->AllocateTensors();
 	cout << (float)(clock()-start)/CLOCKS_PER_SEC << endl;
 
 
-	DebugTensorflow();
+	kmcontext.printOutputTensors();
+
 		//std::cout << "\n====set_input====\n\n";
 
 		//std::cout << "\n====get_output====\n\n";
@@ -241,68 +240,3 @@ interpreter->AllocateTensors();
 }
 
 
-void DebugTensorflow() {
-	std::cout << "DEBUG MODE" << endl;
-
-	kmcontext.printNodeIndex();
-
-	/*for (int execution_plan_index = 0;
-		 execution_plan_index < kmcontext.execution_plan_->size(); execution_plan_index++) {
-		int node_index = kmcontext.execution_plan_[0][execution_plan_index];
-		TfLiteNode& node = kmcontext.nodes_and_registration_[0][node_index].first;
-		const TfLiteRegistration& registration = kmcontext.nodes_and_registration_[0][node_index].second;
-		cout << endl << GetOpName(registration) << endl;
-
-		cout << "input_index  : ";
-		for (int i = 0; i < node.inputs->size; ++i) {
-			cout << node.inputs->data[i] << " ";
-		} cout << endl;
-		
-		cout << "output_index : ";
-		for (int i = 0; i < node.outputs->size; ++i) {
-			cout << node.outputs->data[i] << " ";
-		} cout << endl;
-	}*/
-
-	cout << "END : index" << endl;
-
-//    *((int*)kmcontext.context_->tensors[7].dims+1) -= 1;
-//	*((int*)kmcontext.context_->tensors[3].dims+1) -= 1;
-//	*((int*)kmcontext.context_->tensors[8].dims+4) -= 1;
-
-	kmcontext.printNodeDims();
-
-	/*string input_shape_[3] = { "input",
-								"filter",
-								"bias" };
-	
-	string output_shape_[1] = { "output" };
-
-	for (int execution_plan_index = 0;
-		 execution_plan_index < kmcontext.execution_plan_->size(); execution_plan_index++) {
-		int node_index = kmcontext.execution_plan_[0][execution_plan_index];
-		TfLiteNode& node = kmcontext.nodes_and_registration_[0][node_index].first;
-		const TfLiteRegistration& registration = kmcontext.nodes_and_registration_[0][node_index].second;
-		cout << endl << GetOpName(registration) << endl;
-
-		for (int i = 0; i < node.inputs->size; ++i) {
-			int tensor_index = node.inputs->data[i];
-			int* dims = (int*)kmcontext.context_->tensors[tensor_index].dims;
-			cout << input_shape_[i] << "_shape :\t";
-			for (int j = 1; j <= *dims; ++j) {
-				cout << *(dims + j) << " ";
-			} cout << endl;
-		}
-
-		for (int i = 0; i < node.outputs->size; ++i) {
-			int tensor_index = node.inputs->data[i];
-			int* dims = (int*)kmcontext.context_->tensors[tensor_index].dims;
-			cout << output_shape_[i] << "_shape :\t";
-			for (int j = 1; j <= *dims; ++j) {
-				cout << *(dims + j) << " ";
-			} cout << endl;
-		}
-	}*/
-	cout << "END : dims" << endl;
-	cout << "END" << endl;	
-}

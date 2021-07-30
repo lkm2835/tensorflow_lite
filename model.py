@@ -58,7 +58,7 @@ for k in range(test.shape[2]):
 		print()
 	print()
 """
-"""
+
 train_images, test_images = train_images / 255.0, test_images / 255.0
 
 print()
@@ -70,7 +70,7 @@ print()
 #############################
 model1 = models.Sequential()
 model1.add(layers.Conv2D(2, (3, 3), activation='relu', input_shape=(28, 28, 1)))
-model1.add(layers.Conv2D(1, (3, 3), activation='relu'))
+model1.add(layers.Conv2D(2, (3, 3), activation='relu'))
 #model1.add(layers.MaxPooling2D((2, 2)))
 #model1.add(layers.Conv2D(64, (3, 3), activation='relu'))
 #model1.add(layers.MaxPooling2D((2, 2)))
@@ -134,7 +134,7 @@ for num in range(10):
 		acc += 1
 
 print(acc / 10)
-"""
+
 
 print("TEST")
 saved_path = './model/'
